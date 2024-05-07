@@ -1,3 +1,15 @@
-class main:
-    def __init__(self) -> None:
-        super.__init__
+def main():
+    while True:
+        pass #run main operations
+
+
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    main()

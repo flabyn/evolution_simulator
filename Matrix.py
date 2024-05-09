@@ -1,3 +1,14 @@
+import pygame as py
+import config
+Tiles = {0:py.image.load("assets\grass.png"),1:py.image.load("assets\water.png")}
+
 class Map_Matrix:
-    def __init__(self) -> None:
-        pass
+    def __init__(self,mapdata,screen) -> None:
+        self.map = mapdata
+        self.screen:py.Surface = screen
+    def drawTiles(self):
+        for rowPos,rowValue in enumerate(self.map):
+            for elePos,eleValue in enumerate(rowValue):
+                x_position = elePos*config.TileSize.x
+                y_position = rowPos*config.TileSize.y
+                self.screen.blit(Tiles[eleValue], (x_position,y_position))

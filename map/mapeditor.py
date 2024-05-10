@@ -1,3 +1,5 @@
+#used for editing the map no run time processes
+
 import csv
 import config
 opened_map = []

@@ -6,6 +6,8 @@ class Map_Matrix:
     def __init__(self,mapdata,screen) -> None:
         self.map = mapdata
         self.screen:py.Surface = screen
+    def generateClassMatrix(self):
+        pass
     def drawTiles(self):
         for rowPos,rowValue in enumerate(self.map):
             for elePos,eleValue in enumerate(rowValue):

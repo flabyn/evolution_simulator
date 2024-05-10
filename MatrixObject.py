@@ -3,3 +3,5 @@ class MatrixObject:
         self.x = x
         self.y = y
         self.image = None
+    def generateClassMatrix(self):
+        pass

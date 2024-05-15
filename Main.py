@@ -15,7 +15,8 @@ def main():
     while True:
         start = time.time() #start frame timer
         Screen.fill((0,0,0))
-        MapMatrix.drawTiles()
+        #print(Map_Matrix.map)
+        MapMatrix.drawClassTiles()
 
         end = time.time() #end frame timer
         total_time = (end-start)

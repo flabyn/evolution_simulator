@@ -1,7 +1,5 @@
-import map.MapData
+from MatrixObject import MatrixObject
 
-class Tile:
+class Tile(MatrixObject):
     def __init__(self,x:int,y:int) -> None:
-        self.image = None
-        self.x = x
-        self.y = y
+        super().__init__(x,y)

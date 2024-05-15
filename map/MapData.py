@@ -1,8 +1,10 @@
 import csv
 
-def map_interpreter():
+map_location = {"ground":"map\groundmap.csv","resource":"map/resourcemap.csv"}
+
+def map_interpreter(type):
     opened_map = []
-    with open("map\savedmap.csv","r") as file:
+    with open(map_location[type],"r") as file:
         for row in csv.reader(file):
             opened_map.append(list(map(int,row)))
     return opened_map

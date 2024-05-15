@@ -9,14 +9,18 @@ py.init()
 Screen = py.display.set_mode((ScreenSize.width,ScreenSize.height))
 
 def main():
-    mapdata = MapData.map_interpreter()
-    MapMatrix = Map_Matrix(mapdata=mapdata,screen=Screen)
+    mapdata = MapData.map_interpreter("ground")
+    GroundMatrix = Map_Matrix(mapdata=mapdata,screen=Screen) #bottom layer matrix
+    mapdata = MapData.map_interpreter("resource")
+    ResourceMatrix = Map_Matrix(mapdata=mapdata,screen=Screen)
     HUD = HeadsUpDisplay(Screen)
     while True:
         start = time.time() #start frame timer
         Screen.fill((0,0,0))
         #print(Map_Matrix.map)
-        MapMatrix.drawClassTiles()
+        GroundMatrix.drawClassTiles()
+        ResourceMatrix.drawClassTiles()
+        ResourceMatrix.stepClassTiles()
 
         end = time.time() #end frame timer
         total_time = (end-start)

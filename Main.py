@@ -6,35 +6,53 @@ import pygame as py
 from HUD import HeadsUpDisplay
 
 py.init()
-Screen = py.display.set_mode((ScreenSize.width,ScreenSize.height))
+Screen = py.display.set_mode((ScreenSize.width,ScreenSize.height+HUDScreen.height))
+GameScreen = py.Surface((ScreenSize.width,ScreenSize.height))
+HUDScreen = py.Surface((ScreenSize.width,HUDScreen.height))
 
 def main():
     mapdata = MapData.map_interpreter("ground")
-    GroundMatrix = Map_Matrix(mapdata=mapdata,screen=Screen) #bottom layer matrix
+    GroundMatrix = Map_Matrix(mapdata=mapdata,screen=GameScreen) #bottom layer matrix
     mapdata = MapData.map_interpreter("resource")
-    ResourceMatrix = Map_Matrix(mapdata=mapdata,screen=Screen)
-    HUD = HeadsUpDisplay(Screen)
-    while True:
-        start = time.time() #start frame timer
-        Screen.fill((0,0,0))
-        #print(Map_Matrix.map)
-        GroundMatrix.drawClassTiles()
-        ResourceMatrix.drawClassTiles()
-        ResourceMatrix.stepClassTiles()
+    ResourceMatrix = Map_Matrix(mapdata=mapdata,screen=GameScreen)
+    mapdata = MapData.map_interpreter("animal")
+    AnimalMatrix = Map_Matrix(mapdata=mapdata,screen=GameScreen)
+    HUD = HeadsUpDisplay(HUDScreen)
 
-        end = time.time() #end frame timer
+    FPSTimer = 0
+    SIMTimer = 0
+    while True:
+        start = time.time() #start timer
+
+        if SIMTimer <= 0:
+            ResourceMatrix.stepClassTiles()
+            AnimalMatrix.stepClassTiles()
+            SIMTimer = 1/SIMRATE
+
+
+        if FPSTimer <= 0:
+            GameScreen.fill((0,0,0))
+            GroundMatrix.drawClassTiles()
+            ResourceMatrix.drawClassTiles()
+            AnimalMatrix.drawClassTiles()
+            FPSTimer = 1/FPS
+
+
+
+
+        time.sleep(0.001)
+        end = time.time() #end timer
         total_time = (end-start)
+
         HUD.drawHUD(total_time)
-        time.sleep(max(0,(1/FPS)-total_time))
+
+        Screen.blit(GameScreen, (0,0))
+        Screen.blit(HUDScreen, (0,ScreenSize.height))
+        #decrease timers by loop time (run time)
+        FPSTimer-=total_time
+        SIMTimer-=total_time
 
         py.display.flip() #update display
-
-
-
-
-
-
-
 
 
 if __name__ == "__main__":

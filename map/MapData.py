@@ -1,6 +1,6 @@
 import csv
 
-map_location = {"ground":"map\groundmap.csv","resource":"map/resourcemap.csv"}
+map_location = {"ground":"map\groundmap.csv","resource":"map/resourcemap.csv","animal":"map/animal.csv"}
 
 def map_interpreter(type):
     opened_map = []

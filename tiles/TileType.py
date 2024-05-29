@@ -5,11 +5,13 @@ from tiles.EmptyTile import EmptyTile
 from tiles.Ground.Grass import Grass
 from tiles.Ground.Water import Water
 from tiles.Resource.Fruit import Fruit
+from live_objects.prey.bunny import Bunny
 class TileType(Enum):
     EMPTY = 0
     GRASS = 1
     WATER = 2
     FRUIT = 3
+    BUNNY = 20
 
     def MatrixCreateElement(self,x:int=1,y:int=1) -> Tile:
         match self:
@@ -25,5 +27,9 @@ class TileType(Enum):
             
             case TileType.FRUIT:
                 cell = Fruit(x,y)
+                return cell
+
+            case TileType.BUNNY:
+                cell = Bunny(x,y)
                 return cell
             

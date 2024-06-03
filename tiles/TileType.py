@@ -13,7 +13,7 @@ class TileType(Enum):
     FRUIT = 3
     BUNNY = 20
 
-    def MatrixCreateElement(self,x:int=1,y:int=1) -> Tile:
+    def MatrixCreateElement(self,x:int=1,y:int=1,resourcemap=None,groundmap=None) -> Tile:
         match self:
             case TileType.EMPTY:
                 cell = EmptyTile(x,y)
@@ -30,6 +30,6 @@ class TileType(Enum):
                 return cell
 
             case TileType.BUNNY:
-                cell = Bunny(x,y)
+                cell = Bunny(x,y,resourcemap,groundmap)
                 return cell
             

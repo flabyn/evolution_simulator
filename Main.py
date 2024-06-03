@@ -16,7 +16,7 @@ def main():
     mapdata = MapData.map_interpreter("resource")
     ResourceMatrix = Map_Matrix(mapdata=mapdata,screen=GameScreen)
     mapdata = MapData.map_interpreter("animal")
-    AnimalMatrix = Map_Matrix(mapdata=mapdata,screen=GameScreen)
+    AnimalMatrix = Map_Matrix(mapdata=mapdata,screen=GameScreen,map1=ResourceMatrix,map2=GroundMatrix)
     HUD = HeadsUpDisplay(HUDScreen)
 
     FPSTimer = 0

@@ -3,7 +3,8 @@ from config import *
 from tiles.TileType import TileType
 
 class Map_Matrix:
-    def __init__(self,mapdata,screen) -> None:
+    def __init__(self,mapdata,screen,map1=None,map2=None) -> None:
+        self.othermaps = [map1,map2]
         self.map = self.generateClassMatrix(mapdata)
         self.screen:py.Surface = screen
     def generateClassMatrix(self,mapdata) -> list[list]:
@@ -12,9 +13,11 @@ class Map_Matrix:
             rowmap = []
             for tile_pos,tile in enumerate(row):
                 TILE = TileType(tile)
-                rowmap.append(TILE.MatrixCreateElement(tile_pos,row_pos))
+                rowmap.append(TILE.MatrixCreateElement(tile_pos,row_pos,resourcemap=self.othermaps[0],groundmap=self.othermaps[1]))
             classMatrix.append(rowmap)
         return classMatrix
+    def tileAtPos(self,x,y):
+        return self.map[y][x]
     def drawClassTiles(self):
         for row in self.map:
             for tile in row:
@@ -23,7 +26,7 @@ class Map_Matrix:
     def stepClassTiles(self):
         for row in self.map:
             for tile in row:
-                tile.step()
+                tile.step(self)
     def swapTiles(self,pos1,pos2):
         tile1 = self.map[pos1[1]][pos1[0]]
         tile2 = self.map[pos2[1]][pos2[0]]

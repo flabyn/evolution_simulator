@@ -8,5 +8,5 @@ class MatrixObject:
     def drawSelf(self,screen):
         if self.image:
             screen.blit(self.image, (self.x*TileSize.x,self.y*TileSize.y))
-    def step(self):
+    def step(self,Matrix):
         pass

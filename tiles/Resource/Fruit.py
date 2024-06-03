@@ -13,6 +13,6 @@ class Fruit(Resource):
         self.image = [py.image.load("assets/fruit1.png"),py.image.load("assets/fruit2.png"),py.image.load("assets/fruit3.png")]
     def drawSelf(self, screen):
         screen.blit(self.image[self.growthState], (self.x*TileSize.x,self.y*TileSize.y))
-    def step(self):
+    def step(self,Matrix):
         if random.random() < self.growthChance and self.growthState != self.maxGrowthState:
             self.growthState += 1
